@@ -1,0 +1,117 @@
+from bs4 import BeautifulSoup
+import requests
+
+import numpy as np
+
+with open('test.html') as html_file:
+	soup = BeautifulSoup(html_file, 'lxml')
+
+
+
+headingsArr =[]
+
+try:
+	headingI = soup.find('thead')
+	for episode in headingI.find_all('th'):
+		headingsArr.append(episode.text)
+except Exception as e:
+	headingI = None
+
+headingsArr=[x.encode('utf-8') for x in headingsArr]
+with open('output.txt', 'w') as f:
+    for item in headingsArr:
+        f.write("%s\n" % item)
+
+# headingI = soup.find('thead')
+# for episode in headingI.find_all('th'):
+# 	headingsArr.append(episode.text)
+	
+
+try:
+	enteries = soup.find('tbody')
+except Exception as e:
+	enteries = None
+
+
+	
+#enteries = soup.find('tbody')
+
+
+try:
+	for date in enteries.find_all('div',class_='date'):
+		print(date.span.text)
+except Exception as e:
+	date = None
+
+# for date in enteries.find_all('div',class_='date'):
+# 	print(date.span.text)
+
+
+try:
+	for count in enteries.find_all('strong'):
+ 		print(count.text)
+except Exception as e:
+	count = None
+
+# for count in enteries.find_all('strong'):
+#  	print(count.text)
+
+
+try:
+	for power in enteries.find_all('div',class_='power_the tahoma'):
+		print(power.text)
+except Exception as e:
+	power = None
+
+
+# for power in enteries.find_all('div',class_='power_the tahoma'):
+# 	print(power.text)
+
+# time = enteries.find('span',class_='time').text
+
+# print(time)
+
+
+try:
+	for powerball in enteries.find_all('span',class_='pb'):
+		print(powerball)
+except Exception as e:
+	powerball = None
+
+# for powerball in enteries.find_all('span',class_='pb'):
+# 	print(powerball)
+
+try:
+	for powerballType in enteries.find_all('span',class_='ptype'):
+		print(powerballType.text)
+except Exception as e:
+	powerball = None
+
+
+# for powerballType in enteries.find_all('span',class_='ptype'):
+# 	print(powerballType.text)
+
+try:
+	for normalBalls in enteries.find_all('span',class_='b1'):
+		print(normalBalls.text)
+except Exception as e:
+	normalBalls = None
+
+# for normalBalls in enteries.find_all('span',class_='b1'):
+# 	print(normalBalls.text)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
